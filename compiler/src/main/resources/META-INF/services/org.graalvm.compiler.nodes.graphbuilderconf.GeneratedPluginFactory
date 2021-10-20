@@ -1,0 +1,3 @@
+de.tub.dima.babelfish.ir.instructiongraph.BFRecordGraphPlugins
+de.tub.dima.babelfish.ir.instructiongraph.MemoryAccessGraphPlugin
+de.tub.dima.babelfish.ir.instructiongraph.StateGraphPlugin

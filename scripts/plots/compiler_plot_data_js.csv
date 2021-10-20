@@ -1,0 +1,6 @@
+,query,python_ts,js_ts,java_ts
+0,interpreted,39601.4,8273.8,3550.4
+1,compiled,772.83,705.9,516.85
+2,inlining,783.02,700.04,524.7
+3,escape,79.44,661.86,24.07
+4,loop,26.06,25.71,23.07

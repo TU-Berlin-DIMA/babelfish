@@ -1,0 +1,5 @@
+,query,query,python_ts,js_ts,java_ts,hand_ts
+0,wordcount,wordcount,283.68,255.58,303.98,1612.5
+1,twogram,twogram,305.52,247.8,363.46,1690.8
+2,delay,delay,52.75,53.16,44.19,199.8
+3,etl,etl,108.31,115.15,169.18,187.6

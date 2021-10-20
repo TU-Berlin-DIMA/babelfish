@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.tub.dima.babelfish</groupId>
+    <artifactId>babelfish-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+       <module>compiler</module>
+        <module>benchmark</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Compilation -->
+        <graalvm.version>20.3.0</graalvm.version>
+        <java.version>1.8</java.version>
+
+        <!--  <jdk.path> /home/pgrulich/tools/java/graalvm-ee-java8-20.2.1/jre</jdk.path>-->
+
+        <!-- <jdk.path>/home/pgrulich/tools/java/graalvm-ce-java8-20.3.0/jre</jdk.path>-->
+       <jdk.path>/graalvm-ce-java8-20.3.0/jre</jdk.path>
+ </properties>
+
+ <dependencies>
+
+     <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.java.jvm</groupId>
+            <artifactId>jvmci</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${jdk.path}/lib/jvmci/jvmci-api.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.java.jvm</groupId>
+            <artifactId>jvmci-hotspot</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${jdk.path}/lib/jvmci/jvmci-hotspot.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.java.jvm</groupId>
+            <artifactId>jvmci-services</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${jdk.path}/lib/jvmci-services.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.java.jvm</groupId>
+            <artifactId>jvmci-graal</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${jdk.path}/lib/jvmci/graal.jar</systemPath>
+        </dependency>
+
+
+         <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>${graalvm.version}</version> <!-- or any later version -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-dsl-processor</artifactId>
+            <version>${graalvm.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graalvm.js</groupId>
+            <artifactId>js</artifactId>
+            <version>${graalvm.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>21.0.0-SNAPSHOT</version> <!-- or any later version -->
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>launcher-common</artifactId>
+            <version>${graalvm.version}</version> <!-- or any later version -->
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>polyglot-tck</artifactId>
+            <version>${graalvm.version}</version>  <!-- or any later version -->
+            <scope>provided</scope>
+        </dependency>
+
+         <dependency>
+             <groupId>com.oracle.graal</groupId>
+             <artifactId>graalpython</artifactId>
+             <version>${graalvm.version}</version>
+             <scope>system</scope>
+             <!--<systemPath>${jdk.path}/languages/python/graalpython.jar</systemPath>-->
+             <systemPath>/home/pgrulich/projects/graal-org/graalpython/mxbuild/dists/jdk1.8/graalpython.jar</systemPath>
+         </dependency>
+
+     <dependency>
+         <groupId>org.apache.arrow</groupId>
+         <artifactId>arrow-memory-unsafe</artifactId>
+         <version>2.0.0</version>
+     </dependency>
+
+
+     <dependency>
+         <groupId>org.apache.arrow</groupId>
+         <artifactId>arrow-memory-core</artifactId>
+         <version>2.0.0</version>
+     </dependency>
+
+     <dependency>
+         <groupId>org.apache.arrow</groupId>
+         <artifactId>arrow-vector</artifactId>
+         <version>2.0.0</version>
+     </dependency>
+    </dependencies>
+
+
+   <!-- <profiles>
+        <profile>
+            <id>java-11</id>
+            <activation>
+                <jdk>11</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <compilerArgs>
+                                <arg>&#45;&#45;add-modules=jdk.internal.misc</arg>
+                            </compilerArgs>
+                            <fork>true</fork>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>
+                                &#45;&#45;add-modules java.base/jdk.internal.misc
+                                &#45;&#45;illegal-access=permit
+                            </argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>-->
+</project>
+
